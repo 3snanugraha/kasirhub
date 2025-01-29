@@ -1,7 +1,7 @@
 import PocketBase from "pocketbase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const pb = new PocketBase(`http://${process.env.EXPO_PUBLIC_API_URL}`);
+const pb = new PocketBase(`${process.env.EXPO_PUBLIC_API_URL}`);
 
 // Load auth store from AsyncStorage
 pb.authStore.onChange(async () => {
