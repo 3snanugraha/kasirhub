@@ -1,12 +1,4 @@
-import {
-  Text,
-  View,
-  Image,
-  Pressable,
-  ScrollView,
-  Dimensions,
-  Switch,
-} from "react-native";
+import { Text, View, Image, Pressable, ScrollView, Dimensions, Switch } from "react-native";
 import { useState, useRef, useEffect } from "react";
 import RoundVariation from "@/components/RoundVariation";
 import AppConfig from "@/config/AppConfig";
@@ -23,7 +15,12 @@ export default function Index() {
   useEffect(() => {
     const initConfig = async () => {
       await AppConfig.initialize();
-      setShowSplash(AppConfig.getIsSplashScreen());
+      const splashEnabled = AppConfig.getIsSplashScreen();
+      setShowSplash(splashEnabled);
+      
+      if (!splashEnabled) {
+        router.replace("/(auth)/login");
+      }
     };
     initConfig();
   }, []);
@@ -54,16 +51,6 @@ export default function Index() {
     const index = Math.round(scrollPosition / width);
     setActiveIndex(index);
   };
-
-  useEffect(() => {
-    if (!showSplash) {
-      router.replace("/(auth)/login");
-    }
-  }, [showSplash]);
-
-  if (!showSplash) {
-    return null;
-  }
 
   return (
     <View className="flex-1 bg-white">
