@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KasirHub - Verifikasi Email</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f3f4f6;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+        h1 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #2563eb;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            
+            if (token) {
+                setTimeout(() => {
+                    window.location.href = `kasirhub://verification?token=${token}`;
+                }, 2000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="/logo.png" alt="KasirHub Logo" class="logo">
+        <h1>Verifikasi Email</h1>
+        <p>Sedang mengalihkan ke aplikasi KasirHub...</p>
+        <div class="loader"></div>
+        <p>Jika aplikasi tidak terbuka secara otomatis, silakan buka aplikasi KasirHub secara manual.</p>
+    </div>
+</body>
+</html>

@@ -148,7 +148,7 @@ export default function Login() {
         {/* Register Link */}
         <View className="flex-row justify-center mt-6">
           <Text className="text-gray-600">Belum punya akun? </Text>
-          <Pressable onPress={() => router.push("/(auth)/register")}>
+          <Pressable onPress={() => router.replace("/(auth)/register")}>
             <Text className="text-blue-600 font-medium">Daftar</Text>
           </Pressable>
         </View>

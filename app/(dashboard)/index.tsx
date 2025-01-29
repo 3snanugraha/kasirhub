@@ -1,11 +1,22 @@
-import { Text, View, BackHandler, Alert } from "react-native";
-import { useEffect } from "react";
+import { Text, View, BackHandler, Alert, Pressable } from "react-native";
+import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { logout } from "@/utils/Pocketbase";
+import { logout, checkEmailVerification } from "@/utils/Pocketbase";
+import Sidebar from "@/components/Sidebar";
 
 export default function Dashboard() {
   const router = useRouter();
+  const [isVerified, setIsVerified] = useState(false);
+
+  useEffect(() => {
+    checkVerification();
+  }, []);
+
+  const checkVerification = async () => {
+    const { verified } = await checkEmailVerification();
+    setIsVerified(verified);
+  };
 
   useEffect(() => {
     const backAction = () => {
@@ -40,10 +51,27 @@ export default function Dashboard() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
+      <Sidebar />
       <View className="flex-1 items-center justify-center">
-        <Text className="text-2xl font-bold text-blue-600">
+        <Text className="text-2xl font-bold text-blue-600 mb-4">
           Dashboard
         </Text>
+        
+        {!isVerified && (
+          <View className="items-center px-6">
+            <Text className="text-red-500 text-center mb-4">
+              Email belum terverifikasi
+            </Text>
+            <Pressable 
+              className="bg-blue-600 py-3 px-6 rounded-xl"
+              onPress={() => router.push("/(auth)/verification")}
+            >
+              <Text className="text-white font-medium">
+                Verifikasi Email
+              </Text>
+            </Pressable>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );

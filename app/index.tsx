@@ -1,4 +1,12 @@
-import { Text, View, Image, Pressable, ScrollView, Dimensions, Switch } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  Pressable,
+  ScrollView,
+  Dimensions,
+  Switch,
+} from "react-native";
 import { useState, useRef, useEffect } from "react";
 import RoundVariation from "@/components/RoundVariation";
 import AppConfig from "@/config/AppConfig";
@@ -17,7 +25,7 @@ export default function Index() {
       await AppConfig.initialize();
       const splashEnabled = AppConfig.getIsSplashScreen();
       setShowSplash(splashEnabled);
-      
+
       if (!splashEnabled) {
         router.replace("/(auth)/login");
       }
@@ -121,8 +129,13 @@ export default function Index() {
 
         <View className="w-full space-y-4 mt-1">
           <View className="flex-row items-center justify-center space-x-2 mb-4">
-            <Switch value={showSplash} onValueChange={toggleSplashScreen} />
-            <Text className="text-gray-600">Tampilkan Splash Screen</Text>
+            <Switch
+              value={showSplash}
+              onValueChange={toggleSplashScreen}
+              trackColor={{ false: "#767577", true: "#2563eb" }}
+              thumbColor={'#f4f3f4'}
+            />
+            <Text className="text-gray-600">Tampilkan Start Screen</Text>
           </View>
         </View>
       </View>

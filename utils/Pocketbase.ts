@@ -50,10 +50,44 @@ export const checkAuth = async () => {
       pb.authStore.save(authData.token, authData.model);
       return true;
     }else{
-      // console.log('Auth data is not valid');
+      console.log('Auth data is not valid');
     }
   }
   return false;
+};
+
+export const requestVerification = async (email: string) => {
+  try {
+    console.log('Requesting verification for:', email);
+    const response = await pb.collection('users').requestVerification(email);
+    console.log('Verification response:', response);
+    return { success: true };
+  } catch (error) {
+    console.error('Verification error:', error);
+    return { success: false, error };
+  }
+};
+
+
+export const confirmVerification = async (token: string) => {
+  try {
+    await pb.collection('users').confirmVerification(token);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error };
+  }
+};
+
+export const checkEmailVerification = async () => {
+  try {
+    const user = pb.authStore.record;
+    if (user) {
+      return { verified: user.verified };
+    }
+    return { verified: false };
+  } catch (error) {
+    return { verified: false, error };
+  }
 };
 
 

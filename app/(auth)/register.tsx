@@ -5,7 +5,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
 import { register, login } from "@/utils/Pocketbase";
-import Toast from 'react-native-toast-message';
+import Toast from "react-native-toast-message";
 
 export default function Register() {
   const router = useRouter();
@@ -20,11 +20,11 @@ export default function Register() {
       const result = await register(email, password);
       if (result.success) {
         Toast.show({
-          type: 'success',
-          text1: 'Registrasi Berhasil',
-          text2: 'Silakan tunggu, anda akan login otomatis'
+          type: "success",
+          text1: "Registrasi Berhasil",
+          text2: "Silakan tunggu, anda akan login otomatis",
         });
-        
+
         // Auto login after successful registration
         const loginResult = await login(email, password);
         if (loginResult.success) {
@@ -32,16 +32,16 @@ export default function Register() {
         }
       } else {
         Toast.show({
-          type: 'error',
-          text1: 'Registrasi Gagal',
-          text2: 'Email sudah terdaftar atau tidak valid'
+          type: "error",
+          text1: "Registrasi Gagal",
+          text2: "Email sudah terdaftar atau tidak valid",
         });
       }
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Error',
-        text2: 'Terjadi kesalahan, silakan coba lagi'
+        type: "error",
+        text1: "Error",
+        text2: "Terjadi kesalahan, silakan coba lagi",
       });
     }
     setIsLoading(false);
@@ -50,11 +50,16 @@ export default function Register() {
   return (
     <SafeAreaView className="flex-1 bg-white">
       {/* Header */}
-      <View className="flex-row items-center px-4 py-3 bg-blue-600 rounded-b-3xl">
+      <View className="flex-row items-center px-4 py-3 rounded-b-3xl">
         <Pressable onPress={() => router.back()} className="p-2">
-          <AntDesign name="arrowleft" size={24} style={{color: '#fff'}} />
+          <AntDesign
+            name="left"
+            size={24}
+            style={{ color: "#fff" }}
+            className="bg-blue-600 rounded-xl p-2"
+          />
         </Pressable>
-        <Text className="flex-1 text-xl font-semibold text-white text-center mr-8">
+        <Text className="flex-1 text-2xl font-bold text-blue-600 text-center mr-8">
           Daftar Akun
         </Text>
       </View>
@@ -108,13 +113,15 @@ export default function Register() {
             </View>
           </View>
 
-          <Pressable 
-            className={`bg-blue-600 py-3 px-4 rounded-xl mt-4 ${isLoading ? 'opacity-50' : ''}`}
+          <Pressable
+            className={`bg-blue-600 py-3 px-4 rounded-xl mt-4 ${
+              isLoading ? "opacity-50" : ""
+            }`}
             onPress={handleRegister}
             disabled={isLoading}
           >
             <Text className="text-white text-center font-semibold text-lg">
-              {isLoading ? 'Loading...' : 'Daftar'}
+              {isLoading ? "Loading..." : "Daftar"}
             </Text>
           </Pressable>
         </View>
@@ -138,7 +145,7 @@ export default function Register() {
         {/* Login Link */}
         <View className="flex-row justify-center mt-6">
           <Text className="text-gray-600">Sudah punya akun? </Text>
-          <Pressable onPress={() => router.push("/(auth)/login")}>
+          <Pressable onPress={() => router.replace("/(auth)/login")}>
             <Text className="text-blue-600 font-medium">Masuk</Text>
           </Pressable>
         </View>
