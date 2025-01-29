@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { logout, checkEmailVerification } from "@/utils/Pocketbase";
-import Sidebar from "@/components/Sidebar";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -51,7 +50,6 @@ export default function Dashboard() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <Sidebar />
       <View className="flex-1 items-center justify-center">
         <Text className="text-2xl font-bold text-blue-600 mb-4">
           Dashboard
