@@ -48,6 +48,11 @@ export default function Setting() {
     return () => backHandler.remove();
   }, []);
 
+  const handleLogout = async () => {
+    await logout();
+    router.replace("/(auth)/login");
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 items-center justify-center">
@@ -70,6 +75,9 @@ export default function Setting() {
             </Pressable>
           </View>
         )}
+        <Pressable onPress={handleLogout}>
+          <Text className="text-white text-center mt-4 p-4 bg-red-500 rounded-xl">Logout</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
